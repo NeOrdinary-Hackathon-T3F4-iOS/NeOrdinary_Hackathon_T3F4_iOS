@@ -25,8 +25,13 @@ struct ChallengeAuthView: View {
   
   var body: some View {
     NavigationStack {
-      VStack {
-        
+      ScrollView {
+        VStack(spacing: 24) {
+          ChallengeActionInfoView()
+          Spacer()
+        }
+        .padding(.top, 16)
+        .padding(.horizontal, 16)
       }
       .navigationTitle(type.title)
       .navigationBarTitleDisplayMode(.inline)

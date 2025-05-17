@@ -23,6 +23,7 @@ enum AppFont {
   case body_small_bold
   case body_small_medium
   case body_small_light
+  case caption_medium_light
   
   var uiFont: UIFont {
     switch self {
@@ -56,6 +57,8 @@ enum AppFont {
       return FontManager.shared.medium(ofSize: 14)
     case .body_small_light:
       return FontManager.shared.light(ofSize: 14)
+    case .caption_medium_light:
+      return FontManager.shared.light(ofSize: 12)
     }
   }
   
