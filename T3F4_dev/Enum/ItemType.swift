@@ -43,4 +43,17 @@ extension ItemType {
       Image("item_wateringCan")
     }
   }
+
+  var serverValue: String {
+    switch self {
+    case .sun:
+      "SUN"
+    case .wateringCan:
+      "POT"
+    case .fertiliser:
+      "FERTILIZER"
+    case .clock:
+      "TIME"
+    }
+  }
 }

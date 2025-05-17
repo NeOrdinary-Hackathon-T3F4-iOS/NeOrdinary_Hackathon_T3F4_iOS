@@ -9,8 +9,10 @@ import Foundation
 enum Endpoint {
     case members(membersUuids: String)
     case missions(uuid: String)
-    case mission(uuid: String, id: String)
+    case mission(uuid: String, id: Int)
     case avatars(memberUuids: String)
+    case itemCount(uuid: String, rewardType: String)
+    case growUpdate(uuid: String, avatarId: String, rewardType: String)
 
     
     // 각 케이스별 URL
@@ -25,16 +27,19 @@ enum Endpoint {
             return base + "api/missions/\(id)"
         case .avatars(let membersUuids):
             return base + "api/members/\(membersUuids)"
-       
+        case .itemCount(let uuid, let rewardType):
+          return base + "api/avatars/count/"
+        case .growUpdate(let uuid, let avatarId, let rewardType):
+          return base + "api/growth/update"
         }
     }
     
     // 각 케이스별 HTTP 메서드
     var method: HTTPMethod {
         switch self {
-        case .members:
+        case .members, .growUpdate:
             return .post
-        case .avatars, .missions, .mission:
+        case .avatars, .missions, .mission, .itemCount:
             return .get
         }
     }
@@ -50,6 +55,10 @@ enum Endpoint {
             return ["uuid": uuid, "id": id]
         case .avatars(let memberUuids):
             return ["membersUuid": memberUuids]
+        case .itemCount(let uuid, let rewardType):
+          return ["uuid": uuid, "rewardType": rewardType]
+        case .growUpdate(let uuid, let avatarId, let rewardType):
+          return ["uuid": uuid, "avatarId": avatarId, "rewardType": rewardType]
         }
     }
     
