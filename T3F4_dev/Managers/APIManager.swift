@@ -32,9 +32,9 @@ enum Endpoint {
     // 각 케이스별 HTTP 메서드
     var method: HTTPMethod {
         switch self {
-        case .members, .missions, .mission:
+        case .members:
             return .post
-        case .avatars:
+        case .avatars, .missions, .mission:
             return .get
         }
     }
