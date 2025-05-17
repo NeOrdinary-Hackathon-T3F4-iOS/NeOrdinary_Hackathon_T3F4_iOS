@@ -7,16 +7,33 @@
 
 import UIKit
 
+protocol ScannerView {
+    func stopIndicator()
+}
 
 class ScannerVM {
+
     
-    //Input
-    func setImageToServcer(img: UIImage) {
+    var view: ScannerView?
+    
+    func setImageToServcer(img: UIImage, type: MissionType) {
         //TODO: API Request
+        let apiKey = ""
+        
+        Task {
+            let result = try await OpenAIImageEvaluator.shared.evaluateMealImage(image: img, apiKey: apiKey, type: type)
+            
+            if result.success {
+             
+            } else {
+                //error
+            }
+            view?.stopIndicator()
+        }
+        
+ 
+        
+        
     }
-    
-    
-    //Output
-    
     
 }
