@@ -15,7 +15,6 @@
             <string>Pretendard-SemiBold.otf</string>
             <string>Pretendard-Thin.otf</string>
         </array>
-		<false/>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 		<key>UISceneConfigurations</key>
