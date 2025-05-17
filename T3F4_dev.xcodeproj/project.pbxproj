@@ -11,6 +11,7 @@
 		896F04A92DD882560016A2F4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 896F04A82DD882560016A2F4 /* Alamofire */; };
 		896F04AC2DD8825B0016A2F4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 896F04AB2DD8825B0016A2F4 /* Then */; };
 		896F04AF2DD882600016A2F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 896F04AE2DD882600016A2F4 /* Kingfisher */; };
+		89C21CBC2DD908420014BC63 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 89C21CBB2DD908420014BC63 /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89C21CBC2DD908420014BC63 /* Lottie in Frameworks */,
 				896F04AF2DD882600016A2F4 /* Kingfisher in Frameworks */,
 				896F04A62DD8824F0016A2F4 /* SnapKit in Frameworks */,
 				896F04AC2DD8825B0016A2F4 /* Then in Frameworks */,
@@ -93,6 +95,7 @@
 				896F04A82DD882560016A2F4 /* Alamofire */,
 				896F04AB2DD8825B0016A2F4 /* Then */,
 				896F04AE2DD882600016A2F4 /* Kingfisher */,
+				89C21CBB2DD908420014BC63 /* Lottie */,
 			);
 			productName = T3F4_dev;
 			productReference = 60E5C7932DD868C400635390 /* T3F4_dev.app */;
@@ -127,6 +130,7 @@
 				896F04A72DD882560016A2F4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				896F04AA2DD8825B0016A2F4 /* XCRemoteSwiftPackageReference "Then" */,
 				896F04AD2DD882600016A2F4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				89C21CBA2DD908420014BC63 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 60E5C7942DD868C400635390 /* Products */;
@@ -166,7 +170,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YH4A87H8M4;
+				DEVELOPMENT_TEAM = 68A8NDN495;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = T3F4_dev/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -195,7 +199,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YH4A87H8M4;
+				DEVELOPMENT_TEAM = 68A8NDN495;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = T3F4_dev/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -392,6 +396,14 @@
 				minimumVersion = 8.3.2;
 			};
 		};
+		89C21CBA2DD908420014BC63 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -414,6 +426,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 896F04AD2DD882600016A2F4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		89C21CBB2DD908420014BC63 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89C21CBA2DD908420014BC63 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

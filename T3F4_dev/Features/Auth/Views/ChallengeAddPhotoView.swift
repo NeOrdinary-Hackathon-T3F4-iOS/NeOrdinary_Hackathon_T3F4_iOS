@@ -9,11 +9,14 @@ import SwiftUI
 
 struct ChallengeAddPhotoView: View {
   
+    @State private var isCameraViewPresented = false
+    
   // MARK: - View
   
   var body: some View {
     Button {
       // TODO: - 카메라 컨트롤러로
+        isCameraViewPresented = true
     } label: {
       HStack(spacing: 16) {
         Image("plus")
@@ -34,6 +37,10 @@ struct ChallengeAddPhotoView: View {
           .strokeBorder(Color(R.Color.neutral_20.rawValue), lineWidth: 1)
           .background(Color(R.Color.background_default.rawValue))
       }
+    }
+    .fullScreenCover(isPresented: $isCameraViewPresented) {
+        ScannerContainerView(isPresented: $isCameraViewPresented)
+            .ignoresSafeArea()
     }
   }
 }

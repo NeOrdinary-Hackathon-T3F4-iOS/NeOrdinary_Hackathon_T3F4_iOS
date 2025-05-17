@@ -6,12 +6,15 @@
 //
 
 import Combine
+import SwiftUI
 
 class ChallengeVM: ObservableObject {
   
   @Published var weeklyModels: [ChallengeModel] = []
   @Published var todayModels: [ChallengeModel] = []
-  @Published var isChallengeAuthPresented = false
+  @Published var isChallengeAuthSheetPresented = false
+  @Published var isChallengeAwardSheetPresented = false
+  @Published var isAwardItemPopupPresented = false
   private(set) var selectedChallenge: ChallengeModel = .empty
   
   func onAppear() {
@@ -50,7 +53,15 @@ class ChallengeVM: ObservableObject {
   
   func showChallengeAuthSheet(to selectedChallenge: ChallengeModel) {
     self.selectedChallenge = selectedChallenge
-    isChallengeAuthPresented = true
+    if selectedChallenge.status == .getAward {
+      isAwardItemPopupPresented = true
+    } else {
+      isChallengeAuthSheetPresented = true
+    }
+  }
+  
+  func useItem() {
+    isAwardItemPopupPresented = false
+    isChallengeAwardSheetPresented = true
   }
 }
-

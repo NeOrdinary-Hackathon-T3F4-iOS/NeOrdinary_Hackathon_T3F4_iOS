@@ -32,12 +32,20 @@ struct ChallengeView: View {
     }.onAppear() {
       viewModel.onAppear()
     }
-    .fullScreenCover(isPresented: $viewModel.isChallengeAuthPresented) {
+    .fullScreenCover(isPresented: $viewModel.isChallengeAuthSheetPresented) {
       ChallengeAuthView(
         selectedChallenge: viewModel.selectedChallenge,
-        isPresented: $viewModel.isChallengeAuthPresented
+        isPresented: $viewModel.isChallengeAuthSheetPresented
+      )
+    }
+    .fullScreenCover(isPresented: $viewModel.isAwardItemPopupPresented) {
+      ChallengeAwardPopupView(of: viewModel)
+    }
+    .fullScreenCover(isPresented: $viewModel.isChallengeAwardSheetPresented) {
+      ChallengeAwardView(
+        selectedChallenge: viewModel.selectedChallenge,
+        isPresented: $viewModel.isChallengeAwardSheetPresented
       )
     }
   }
 }
-

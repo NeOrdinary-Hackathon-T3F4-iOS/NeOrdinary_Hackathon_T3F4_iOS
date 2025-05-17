@@ -18,7 +18,13 @@ struct WeeklyChallengeView: View {
             VStack( spacing: 4) {
                 ForEach(viewModel.weeklyModels, id: \.self) { challenge in
                   Button {
-                    viewModel.showChallengeAuthSheet(to: challenge)
+                    if challenge.status == .getAward {
+                      withoutAnimation {
+                        viewModel.showChallengeAuthSheet(to: challenge)
+                      }
+                    } else {
+                      viewModel.showChallengeAuthSheet(to: challenge)
+                    }
                   } label: {
                     ChallengeRow(name: challenge.name, status: challenge.status, itemType: challenge.itemType)
                   }
