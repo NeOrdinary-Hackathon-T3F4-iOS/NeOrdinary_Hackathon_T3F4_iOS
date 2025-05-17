@@ -22,13 +22,9 @@ class MainVC: UITabBarController {
         let settingsVC = UIHostingController(rootView: ChallengeView())
         settingsVC.tabBarItem = UITabBarItem(title: "챌린지", image: UIImage(named: "challengeTap"), tag: 1)
 
-        // 필요하면 UINavigationController로 감싸기
-        let homeNav = UINavigationController(rootViewController: homeVC)
-        let settingsNav = UINavigationController(rootViewController: settingsVC)
-        
         tabBar.tintColor = UIColor(named: R.Color.primary_default.rawValue)
         tabBar.unselectedItemTintColor = UIColor(named: R.Color.neutral_40.rawValue)
 
-        viewControllers = [homeNav, settingsNav]
+      viewControllers = [homeVC, settingsVC]
     }
 }
