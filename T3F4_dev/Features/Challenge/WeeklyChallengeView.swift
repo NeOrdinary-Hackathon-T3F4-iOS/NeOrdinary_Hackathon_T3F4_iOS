@@ -28,8 +28,12 @@ struct WeeklyChallengeView: View {
                   .clipShape(.rect(cornerRadius: 16))
             VStack( spacing: 4) {
                 ForEach(viewModel.weeklyModels, id: \.self) { challenge in
+                  Button {
+                    viewModel.showChallengeAuthSheet(to: challenge)
+                  } label: {
                     ChallengeRow(name: challenge.name, status: challenge.status, itemType: challenge.itemType)
-                   
+                  }
+                  .buttonStyle(.plain)
                 }
             }.padding(.top, 8)
         }.padding(.horizontal).padding(.vertical).background(Color.white).cornerRadius(20)

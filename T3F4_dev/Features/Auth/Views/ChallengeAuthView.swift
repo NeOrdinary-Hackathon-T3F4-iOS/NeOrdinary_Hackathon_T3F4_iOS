@@ -11,13 +11,13 @@ struct ChallengeAuthView: View {
   
   // MARK: - Properties
   
-  let type: ChallengeType
+  private var selectedChallenge: ChallengeModel
   @Binding private var isPresented: Bool
   
   // MARK: - Initialize
   
-  init(type: ChallengeType, isPresented: Binding<Bool>) {
-    self.type = type
+  init(selectedChallenge: ChallengeModel, isPresented: Binding<Bool>) {
+    self.selectedChallenge = selectedChallenge
     self._isPresented = isPresented
   }
   
@@ -38,7 +38,7 @@ struct ChallengeAuthView: View {
         .padding(.top, 16)
         .padding(.horizontal, 16)
       }
-      .navigationTitle(type.title)
+      .navigationTitle(selectedChallenge.challengeType.title)
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .topBarTrailing) {

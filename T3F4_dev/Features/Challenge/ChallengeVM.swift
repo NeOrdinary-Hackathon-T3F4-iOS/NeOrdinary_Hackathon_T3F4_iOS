@@ -8,38 +8,49 @@
 import Combine
 
 class ChallengeVM: ObservableObject {
+  
+  @Published var weeklyModels: [ChallengeModel] = []
+  @Published var todayModels: [ChallengeModel] = []
+  @Published var isChallengeAuthPresented = false
+  private(set) var selectedChallenge: ChallengeModel = .empty
+  
+  func onAppear() {
     
-    @Published var weeklyModels: [ChallengeModel] = []
-    @Published var todayModels: [ChallengeModel] = []
+    weeklyModels = [
+      ChallengeModel(
+        name:"음식 남기지 않기",
+        status: .complete,
+        itemType: .clock,
+        challengeType: .today
+      ),
+      ChallengeModel(
+        name:"음식 남기지 않기",
+        status: .getAward,
+        itemType: .fertiliser,
+        challengeType: .today
+      )
+    ]
     
-    func onAppear() {
-        
-        weeklyModels = [
-            ChallengeModel(
-                name:"음식 남기지 않기",
-                status: .complete,
-                itemType: .clock
-            ),
-            ChallengeModel(
-                name:"음식 남기지 않기",
-                status: .getAward,
-                itemType: .fertiliser
-            )
-        ]
-        
-        todayModels = [
-            ChallengeModel(
-                name:"음식 남기지 않기",
-                status: .nonComplte,
-                itemType: .sun
-            ),
-            ChallengeModel(
-                name:"음식 남기지 않기",
-                status: .nonComplte,
-                itemType: .wateringCan
-            )
-        ]
-        
-    }
+    todayModels = [
+      ChallengeModel(
+        name:"음식 남기지 않기",
+        status: .nonComplte,
+        itemType: .sun,
+        challengeType: .weekly
+      ),
+      ChallengeModel(
+        name:"음식 남기지 않기",
+        status: .nonComplte,
+        itemType: .wateringCan,
+        challengeType: .weekly
+      )
+    ]
+    
+  }
+  
+  func showChallengeAuthSheet(to selectedChallenge: ChallengeModel) {
+    self.selectedChallenge = selectedChallenge
+    isChallengeAuthPresented = true
+  }
 }
 

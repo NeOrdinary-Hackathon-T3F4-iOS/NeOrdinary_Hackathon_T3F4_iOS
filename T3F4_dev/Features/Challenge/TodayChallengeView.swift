@@ -29,8 +29,12 @@ struct TodayChallengeView: View {
             
             VStack(spacing: 4) {
                 ForEach(viewModel.todayModels, id: \.self) { challenge in
+                  Button {
+                    viewModel.showChallengeAuthSheet(to: challenge)
+                  } label: {
                     ChallengeRow(name: challenge.name, status: challenge.status, itemType: challenge.itemType)
-                   
+                  }
+                  .buttonStyle(.plain)
                 }
             }.padding(.top, 8)
         }
