@@ -13,9 +13,14 @@ protocol ScannerView {
 
 class ScannerVM {
 
-    
+  let type: MissionType
     var view: ScannerView?
-    
+  
+  init(type: MissionType, view: ScannerView? = nil) {
+    self.type = type
+    self.view = view
+  }
+
     func setImageToServcer(img: UIImage, type: MissionType) {
         //TODO: API Request
         let apiKey = ""
@@ -24,7 +29,6 @@ class ScannerVM {
             let result = try await OpenAIImageEvaluator.shared.evaluateMealImage(image: img, apiKey: apiKey, type: type)
             
             if result.success {
-          
             } else {
                 //error
             }

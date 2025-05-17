@@ -22,7 +22,7 @@ struct HomeView: View {
       VStack(spacing: UI.contentSpacing) {
         // 프로그래스 바
         ProgressBar(
-          value: 0.5,
+          value: 0.9,
           height: 24,
           foregroundColor: Color(R.Color.primary_default.rawValue),
           backgroundColor: Color(R.Color.neutral_white.rawValue),

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ItemSectionView: View {
   
+  @State private var isZero = true
   // MARK: - UI
   
   private enum UI {
@@ -22,12 +23,12 @@ struct ItemSectionView: View {
   
   var body: some View {
     HStack {
-      ForEach(ItemType.allCases, id: \.self) { item in
+    ForEach(ItemType.allCases, id: \.self) { item in
         VStack {
           item.image
           Text("0") // TODO: - 현재 하드코딩, DB에서 받아오기
             .font(AppFont.body_medium_medium.font)
-            .foregroundStyle(UI.textColor)
+            .foregroundStyle(isZero ? Color(R.Color.text_inverse.rawValue) : UI.textColor)
         }
       }
     }

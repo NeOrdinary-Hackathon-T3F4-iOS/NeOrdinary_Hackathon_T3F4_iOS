@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ScannerContainerView: UIViewControllerRepresentable {
     @Binding var isPresented: Bool
-
+  let type: MissionType
+  
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
 
     func makeUIViewController(context: Context) -> ScannerVC {
-        let vm = ScannerVM()
+      let vm = ScannerVM(type: type)
         let vc = ScannerVC(viewModel: vm)
         vm.view = vc
 

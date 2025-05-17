@@ -17,9 +17,9 @@ struct GrowSuccessTopView: View {
             Spacer().frame(height: 40)
             Image("SuccesGrow")
             Spacer().frame(height: 24)
-            Text("새싹이 성장 완료").font(AppFont.heading_Medium_bold.font)
+            Text("새싹이 성장 완료 💚").font(AppFont.heading_Medium_bold.font)
             Text(viewModel.growedTime).font(AppFont.body_medium_medium.font)
-            
+            Spacer().frame(height: 24)
             VStack(alignment: .center, spacing: 2) {
                 Spacer().frame(height: 16)
                 

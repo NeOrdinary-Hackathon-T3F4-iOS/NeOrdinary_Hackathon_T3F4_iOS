@@ -20,7 +20,7 @@ enum Endpoint {
         case .members(let membersUuids):
           return base + "api/members/\(membersUuids)"
         case .missions:
-            return base + "api/missions"
+            return base + "api/missions/"
         case .mission(let uuid, let id):
             return base + "api/missions/\(id)"
         case .avatars(let membersUuids):

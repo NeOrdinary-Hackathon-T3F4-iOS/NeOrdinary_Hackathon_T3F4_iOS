@@ -12,10 +12,111 @@ enum MissionType {
     case upcycling
     case petLabel
     case multiuse
-    
+    case flogging
+  
+  init(fromTitle title: String) {
+    switch title {
+    case "음식 남기지 않기":
+      self = .cleanPlate
+    case "매일 텀블러 사용":
+      self = .tumbler
+    case "업사이클링 실천":
+      self = .upcycling
+    case "페트병 라벨 제거해서 버리기":
+      self = .petLabel
+    case "다회용기 챙겨서 테이크아웃":
+      self = .multiuse
+    case "플로깅 2회 이상":
+      self = .flogging
+    default:
+      // 기본값 설정 또는 에러 처리
+      self = .cleanPlate
+    }
+  }
 }
 
 extension MissionType {
+  var image: String {
+    switch self {
+    case .cleanPlate:
+      "detail_trash"
+    case .tumbler:
+      "detail_one"
+    case .upcycling:
+      "detail_upcycle"
+    case .petLabel:
+      "detail_pet"
+    case .multiuse:
+      "detail_reusable"
+    case .flogging:
+      "detail_fertiliser"
+    }
+  }
+  
+  var title: String {
+    switch self {
+    case .cleanPlate:
+      "음식 남기지 않기"
+    case .tumbler:
+      "매일 텀블러 사용"
+    case .upcycling:
+      "업사이클링 실천"
+    case .petLabel:
+      "페트병 라벨 제거해서 버리기"
+    case .multiuse:
+      "다회용기 챙겨서 테이크아웃"
+    case .flogging:
+      "플로깅 2회 이상"
+    }
+  }
+  
+  var subTitle: String {
+    switch self {
+    case .cleanPlate:
+      "음식물 쓰레기 없는 하루"
+    case .tumbler:
+      "다회용기 사용으로 지구 지키기"
+    case .upcycling:
+      "내 손으로 버려지는 물건 재탄생시키기"
+    case .petLabel:
+      "확실한 분리수거로 환경 지키기"
+    case .multiuse:
+      "일회용기 안 쓰기 끝판왕"
+    case .flogging:
+      "조깅하며 길가 쓰레기 수거하기"
+    }
+  }
+  
+  var authMessage: String {
+    switch self {
+    case .cleanPlate:
+      "음식 다 먹은 상태의 사진 1장 이상"
+    case .tumbler:
+      "텀블러 사진 1일 기준 1장 이상"
+    case .upcycling:
+      "업사이클링 실천 여부가 명확히 드러나는 사진 1장 이상"
+    case .petLabel:
+      "라벨 제거한 상태의 페트병 쓰레기 사진 1장 이상"
+    case .multiuse:
+      "다회용기에 담긴 음식 + 영수증 사진 1장 이상"
+    case .flogging:
+      "플로깅 수행 여부가 명확히 드러나는 사진 2장 이상"
+    }
+  }
+  
+  var authSubMessage: String {
+    switch self {
+    case .cleanPlate, .tumbler, .petLabel:
+      ""
+    case .upcycling:
+      "(ex. 버리는 양말로 인형 만들기, 헌 옷으로 가방 만들기 등)"
+    case .multiuse:
+      "사진 속 음식과 영수증 항목이 일치해야 하며, 반드시 음식과 영수증을 같이 찍어 업로드해주세요."
+    case .flogging:
+      "(ex. 플로깅 용품, 쓰레기 담긴 봉투 등)"
+    }
+  }
+  
     var prompt: String {
         switch self {
             
@@ -66,6 +167,17 @@ extension MissionType {
                     - errors: 판단 실패 시 이유
                     - message: 간단한 한국어 설명  
                     """
+          
+        case .flogging:
+                    """
+                    당신은 사진 한 장으로 ‘플로깅(plogging)’ 활동이 이루어지고 있는지를 판별하는 전문가 AI입니다.  
+                    사진에서 사람이 조깅하면서 쓰레기를 줍는 장면이 명확히 보이면 성공으로 간주합니다.  
+                    업로드된 사진을 보고 다음 키만 JSON으로 응답하세요.  
+                    - success: 플로깅이 명확히 확인되면 true, 아니면 false  
+                    - errors: 판단 실패 또는 불명확한 이유 목록(성공 시 빈 배열)  
+                    - message: 간단한 한국어 설명    
+                    """
+          
         }
     }
 }

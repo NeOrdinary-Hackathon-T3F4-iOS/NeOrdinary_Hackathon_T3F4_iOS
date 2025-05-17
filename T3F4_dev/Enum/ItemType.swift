@@ -10,9 +10,9 @@ import SwiftUI
 
 enum ItemType: String, CaseIterable {
   case sun
-  case clock
-  case fertiliser
   case wateringCan
+  case fertiliser
+  case clock
   
   init(fromAPI value: String) {
     switch value.uppercased() {
@@ -34,11 +34,11 @@ extension ItemType {
   var image: Image {
     switch self {
     case .sun:
-      Image("item_clock")
-    case .clock:
-      Image("item_fertiliser")
-    case .fertiliser:
       Image("item_sun")
+    case .clock:
+      Image("item_clock")
+    case .fertiliser:
+      Image("item_fertiliser")
     case .wateringCan:
       Image("item_wateringCan")
     }
