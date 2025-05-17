@@ -41,6 +41,7 @@ struct ChallengeAddPhotoView: View {
       }
     }
     .fullScreenCover(isPresented: $isCameraViewPresented) {
+        
       ScannerContainerView(isPresented: $isCameraViewPresented, selectedChallenge: selectedChallenge, type: type)
             .ignoresSafeArea()
     }

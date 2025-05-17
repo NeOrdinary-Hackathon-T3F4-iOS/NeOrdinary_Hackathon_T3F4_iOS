@@ -17,7 +17,9 @@ struct ScannerContainerView: UIViewControllerRepresentable {
     }
 
     func makeUIViewController(context: Context) -> ScannerVC {
-      let vm = ScannerVM(type: type)
+        print("type \(type) ")
+
+        let vm = ScannerVM(type: type, selectedChallenge: selectedChallenge)
         let vc = ScannerVC(viewModel: vm)
         vm.view = vc
 
@@ -30,6 +32,8 @@ struct ScannerContainerView: UIViewControllerRepresentable {
     }
 
     class Coordinator: NSObject, ScannerVCDelegate {
+   
+        
         var parent: ScannerContainerView
 
         init(_ parent: ScannerContainerView) {

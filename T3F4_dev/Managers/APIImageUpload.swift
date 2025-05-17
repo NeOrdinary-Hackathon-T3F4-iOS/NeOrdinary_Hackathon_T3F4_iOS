@@ -14,6 +14,7 @@ class APIImageUpload {
     static let shared = APIImageUpload()
     
     private init() {}
+//    "http://43.201.72.196:8080/"
     //    /api/missions/{missionId}/progress/{memberUuid}
     
     func uploadImageWithParams(
@@ -29,7 +30,7 @@ class APIImageUpload {
         
         AF.upload(multipartFormData: { multipartFormData in
             // 이미지 추가
-            multipartFormData.append(imageData, withName: "image", fileName: "photo.jpg", mimeType: "image/jpeg")
+            multipartFormData.append(imageData, withName: "file", fileName: "photo.jpg", mimeType: "image/jpeg")
             
             // 파라미터 추가
             for (key, value) in params {

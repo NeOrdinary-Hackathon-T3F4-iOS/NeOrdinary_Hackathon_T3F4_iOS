@@ -15,10 +15,83 @@ protocol ScannerVCDelegate: AnyObject {
 
 
 class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate, ScannerView {
-    func stopIndicator() {
-        stopLoading()
+    
+    func errorAlert(err: String) {
+        self.stopLoading()
+
+            let authAlertController: UIAlertController
+            authAlertController = UIAlertController(
+                title: "에러",
+                message: "\(err) 에러가 발생했습니다.\n잠시후 다시 시도해주세요",
+                preferredStyle: .alert
+            )
+            
+            let getAuthAction: UIAlertAction
+            getAuthAction = UIAlertAction(
+                title: "확인",
+                style: .cancel,
+                handler: { _ in
+                    DispatchQueue.global().async {
+                        self.captureSession.startRunning()
+                    }
+                }
+            )
+            
+            authAlertController.addAction(getAuthAction)
+            self.present(authAlertController, animated: true, completion: nil)
+        
     }
     
+    func pop() {
+        self.stopLoading()
+
+        let authAlertController: UIAlertController
+        authAlertController = UIAlertController(
+            title: "미션",
+            message: "미션에 성공 하셨습니다.\n이전 화면으로 돌아갑니다.",
+            preferredStyle: .alert
+        )
+        
+        let getAuthAction: UIAlertAction
+        getAuthAction = UIAlertAction(
+            title: "확인",
+            style: .default,
+            handler: { _ in
+                self.delegate?.scannerDidFinish()
+
+            }
+        )
+        authAlertController.addAction(getAuthAction)
+        self.present(authAlertController, animated: true, completion: nil)
+
+    }
+    
+    func failAlert() {
+        self.stopLoading()
+
+            let authAlertController: UIAlertController
+            authAlertController = UIAlertController(
+                title: "미션 실패",
+                message: "미션에 실패하셨습니다.\n제대로 된 이미지를 캡처해주세요.",
+                preferredStyle: .alert
+            )
+            
+            let getAuthAction: UIAlertAction
+            getAuthAction = UIAlertAction(
+                title: "확인",
+                style: .cancel,
+                handler: { _ in
+                    self.captureSession.startRunning()
+
+
+                }
+            )
+            
+            authAlertController.addAction(getAuthAction)
+            self.present(authAlertController, animated: true, completion: nil)
+        
+    }
+ 
     init(viewModel: ScannerVM) {
         self.viewModel = viewModel
         
