@@ -15,7 +15,10 @@ struct ScannerContainerView: UIViewControllerRepresentable {
     }
 
     func makeUIViewController(context: Context) -> ScannerVC {
-        let vc = ScannerVC()
+        let vm = ScannerVM()
+        let vc = ScannerVC(viewModel: vm)
+        vm.view = vc
+
         vc.delegate = context.coordinator  // 연결
         return vc
     }
