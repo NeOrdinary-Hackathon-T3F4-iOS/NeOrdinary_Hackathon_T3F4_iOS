@@ -148,10 +148,13 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
         let settings = AVCapturePhotoSettings()
         settings.flashMode = .auto
         photoOutput.capturePhoto(with: settings, delegate: self)
-        previewLayer.connection?.isEnabled = false
         conformBtn.backgroundColor = UIColor(named: R.Color.primary_default.rawValue)
         conformBtn.isEnabled = true
         againCaptureBtn.isSelected = true
+        
+        //카메라 멈추기
+        captureSession.stopRunning()
+        previewLayer.connection?.isEnabled = false
     }
     
  
@@ -169,6 +172,12 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
             conformBtn.isEnabled = false
             previewLayer.connection?.isEnabled = true
             againCaptureBtn.isSelected = false
+            
+            DispatchQueue.global().async {
+                self.captureSession.startRunning()
+
+            }
+
         } else {
             // 닫기
             delegate?.scannerDidFinish()
