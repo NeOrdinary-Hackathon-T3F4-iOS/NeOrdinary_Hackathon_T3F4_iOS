@@ -30,7 +30,8 @@ class SplashVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    }
+
+   }
     
     private func makelogo() {
         self.view.addSubview(logo)
@@ -60,10 +61,8 @@ class SplashVC: UIViewController {
      */
     @objc func updatetimer() {
         maxseconds = maxseconds - 1
-        print(maxseconds)
         if maxseconds == 0 {
             timer.invalidate()
-            print("timer Invalidate")
             navigationController?.viewControllers = [MainVC()]
             return
         } else if maxseconds < 0 {
