@@ -11,9 +11,23 @@ import Then
 import SnapKit
 import Kingfisher
 
-class MainVC: UIViewController {
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
+class MainVC: UITabBarController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let homeVC = UIViewController()
+        homeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "homeTap"), tag: 0)
+
+        let settingsVC = UIViewController()
+        settingsVC.tabBarItem = UITabBarItem(title: "챌린지", image: UIImage(named: "challengeTap"), tag: 1)
+
+        // 필요하면 UINavigationController로 감싸기
+        let homeNav = UINavigationController(rootViewController: homeVC)
+        let settingsNav = UINavigationController(rootViewController: settingsVC)
+        
+        tabBar.tintColor = UIColor(named: R.Color.primary_default.rawValue)
+        tabBar.unselectedItemTintColor = UIColor(named: R.Color.neutral_40.rawValue)
+
+        viewControllers = [homeNav, settingsNav]
+    }
 }
