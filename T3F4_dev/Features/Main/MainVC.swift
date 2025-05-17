@@ -19,7 +19,7 @@ class MainVC: UITabBarController {
         let homeVC = UIHostingController(rootView: HomeView())
         homeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "homeTap"), tag: 0)
 
-        let settingsVC = UIViewController()
+        let settingsVC = UIHostingController(rootView: ChallengeView())
         settingsVC.tabBarItem = UITabBarItem(title: "챌린지", image: UIImage(named: "challengeTap"), tag: 1)
 
         // 필요하면 UINavigationController로 감싸기
