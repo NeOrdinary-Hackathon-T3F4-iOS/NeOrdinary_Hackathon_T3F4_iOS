@@ -18,10 +18,12 @@ class ChallengeVM: ObservableObject {
   private(set) var selectedChallenge: ChallengeModel = .empty
   
   func onAppear() {
+//    setTest()
     fetchChallengeList()
   }
   
   func refresh() {
+//    setTest()
     fetchChallengeList()
   }
   
@@ -86,36 +88,54 @@ class ChallengeVM: ObservableObject {
     isAwardItemPopupPresented = false
     isChallengeAwardSheetPresented = true
   }
+  
+  func setTest() {
+    todayModels = [
+      ChallengeModel(
+        id: 1,
+        name:"음식 남기지 않기",
+        status: .nonComplete,
+        itemType: .sun,
+        challengeType: .today
+      ),
+      ChallengeModel(
+        id: 2,
+        name:"페트병 라벨 제거해서 버리기",
+        status: .nonComplete,
+        itemType: .sun,
+        challengeType: .today
+      )
+    ]
+    
+    weeklyModels = [
+      ChallengeModel(
+        id: 3,
+        name:"매일 텀블러 사용",
+        status: .nonComplete,
+        itemType: .sun,
+        challengeType: .weekly
+      ),
+      ChallengeModel(
+        id: 4,
+        name:"다회용기 챙겨서 테이크아웃",
+        status: .nonComplete,
+        itemType: .wateringCan,
+        challengeType: .weekly
+      ),
+      ChallengeModel(
+        id: 5,
+        name:"플로깅 2회 이상",
+        status: .nonComplete,
+        itemType: .fertiliser,
+        challengeType: .weekly
+      ),
+      ChallengeModel(
+        id: 6,
+        name:"업사이클링 실천",
+        status: .nonComplete,
+        itemType: .clock,
+        challengeType: .weekly
+      )
+    ]
+  }
 }
-
-/*
- weeklyModels = [
-   ChallengeModel(
-     name:"음식 남기지 않기",
-     status: .complete,
-     itemType: .clock,
-     challengeType: .weekly
-   ),
-   ChallengeModel(
-     name:"음식 남기지 않기",
-     status: .getAward,
-     itemType: .fertiliser,
-     challengeType: .weekly
-   )
- ]
- 
- todayModels = [
-   ChallengeModel(
-     name:"음식 남기지 않기",
-     status: .nonComplte,
-     itemType: .sun,
-     challengeType: .today
-   ),
-   ChallengeModel(
-     name:"음식 남기지 않기",
-     status: .nonComplte,
-     itemType: .wateringCan,
-     challengeType: .today
-   )
- ]
- */

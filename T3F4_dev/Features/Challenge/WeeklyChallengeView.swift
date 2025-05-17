@@ -13,7 +13,7 @@ struct WeeklyChallengeView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ChallengeInfoView(type: .weekly)
+          ChallengeInfoView(model: $viewModel.weeklyModels, type: .weekly)
  
             VStack( spacing: 4) {
                 ForEach(viewModel.weeklyModels, id: \.self) { challenge in
@@ -40,6 +40,7 @@ private extension WeeklyChallengeView {
       
       // MARK: - Properties
       
+      @Binding var model: [ChallengeModel]
       let type: ChallengeType
       
       // MARK: - UI
@@ -60,13 +61,13 @@ private extension WeeklyChallengeView {
             .foregroundStyle(Color(R.Color.neutral_black.rawValue))
           Spacer()
           HStack(spacing: UI.contentSpacing) {
-            Text("1")
+            Text("\(model.filter({ $0.status != .nonComplete }).count)")
               .font(AppFont.heading_Medium_bold.font)
               .foregroundStyle(Color(R.Color.primary_default.rawValue))
             Text("/")
               .font(AppFont.body_medium_medium.font)
               .foregroundStyle(Color(R.Color.neutral_90.rawValue))
-            Text("2")
+            Text("\(model.count)")
               .font(AppFont.body_large_bold.font)
               .foregroundStyle(Color(R.Color.neutral_90.rawValue))
           }
