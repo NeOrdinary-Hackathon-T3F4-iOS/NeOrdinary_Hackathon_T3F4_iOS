@@ -38,7 +38,9 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate, ScannerView {
             )
             
             authAlertController.addAction(getAuthAction)
-            self.present(authAlertController, animated: true, completion: nil)
+      DispatchQueue.main.async {
+        self.present(authAlertController, animated: true, completion: nil)
+      }
         
     }
     
@@ -62,7 +64,9 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate, ScannerView {
             }
         )
         authAlertController.addAction(getAuthAction)
+      DispatchQueue.main.async {
         self.present(authAlertController, animated: true, completion: nil)
+      }
 
     }
     
@@ -88,7 +92,9 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate, ScannerView {
             )
             
             authAlertController.addAction(getAuthAction)
-            self.present(authAlertController, animated: true, completion: nil)
+      DispatchQueue.main.async {
+        self.present(authAlertController, animated: true, completion: nil)
+      }
         
     }
  
