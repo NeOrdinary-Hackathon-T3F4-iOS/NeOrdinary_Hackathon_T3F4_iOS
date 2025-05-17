@@ -14,11 +14,28 @@ protocol ScannerVCDelegate: AnyObject {
 }
 
 
-class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
+class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate, ScannerView {
+    func stopIndicator() {
+        stopLoading()
+    }
+    
+    init(viewModel: ScannerVM) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private let indicator = UIActivityIndicatorView(style: .large)
+    
+    var pickedImg = UIImage()
     
     weak var delegate: ScannerVCDelegate?
-
-    let viewModel = ScannerVM()
+    
+    let viewModel: ScannerVM
     
     let bottomBar = UIView().then {
         $0.backgroundColor = UIColor(named: R.Color.neutral_white.rawValue)
@@ -58,7 +75,7 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
         $0.titleLabel?.font = .boldSystemFont(ofSize: 16)
         $0.setImage(UIImage(named: "captureBtn"), for: .normal)
     }
-
+    
     
     var returnImg = UIImage()
     
@@ -67,9 +84,11 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = .clear
         
+        indicator.center = view.center
+        indicator.hidesWhenStopped = true
+        
         cameraDeviceSettings()
         configurePreviewLayer()
-        
         
         self.view.addSubview(bottomBar)
         self.view.addSubview(topBar)
@@ -89,7 +108,27 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
         DispatchQueue.global().async {
             self.captureSession.startRunning()
         }
+        
+        view.addSubview(indicator)
+
+
     }
+    
+    func startLoading() {
+        DispatchQueue.main.async {
+            
+            self.indicator.startAnimating()
+            self.view.isUserInteractionEnabled = false  // 터치 방지
+        }
+       }
+
+       func stopLoading() {
+           DispatchQueue.main.async {
+               self.indicator.stopAnimating()
+               self.view.isUserInteractionEnabled = true
+
+           }
+       }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -108,7 +147,7 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
     
     
     func btnConfigure() {
-     
+        
         self.bottomBar.addSubview(captureBtn)
         
         [againCaptureBtn, conformBtn].forEach {
@@ -134,10 +173,6 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
             $0.trailing.equalToSuperview().inset(16)
         }
         
-        
-        
-        
-        
         captureBtn.addTarget(self, action: #selector(captureBtnTapped), for: .touchUpInside)
         againCaptureBtn.addTarget(self, action: #selector(againCaptureBtnTapped), for: .touchUpInside)
         conformBtn.addTarget(self, action: #selector(conformBtnTapped), for: .touchUpInside)
@@ -148,18 +183,25 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
         let settings = AVCapturePhotoSettings()
         settings.flashMode = .auto
         photoOutput.capturePhoto(with: settings, delegate: self)
-        previewLayer.connection?.isEnabled = false
         conformBtn.backgroundColor = UIColor(named: R.Color.primary_default.rawValue)
         conformBtn.isEnabled = true
         againCaptureBtn.isSelected = true
+        
+        //카메라 멈추기
+        previewLayer.connection?.isEnabled = false
+        
+        captureSession.stopRunning()
+
     }
     
- 
     
-    //확인 -> vm
+    
+    //MARK: 등록하기 -> VM
     @objc
     func conformBtnTapped() {
-        print("확인")
+        startLoading()
+        viewModel.setImageToServcer(img: self.pickedImg, type: .petLabel)
+        
     }
     @objc
     func againCaptureBtnTapped() {
@@ -169,13 +211,19 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
             conformBtn.isEnabled = false
             previewLayer.connection?.isEnabled = true
             againCaptureBtn.isSelected = false
+            
+            DispatchQueue.global().async {
+                self.captureSession.startRunning()
+                
+            }
+            
         } else {
             // 닫기
             delegate?.scannerDidFinish()
             againCaptureBtn.isSelected = true
-
+            
         }
-
+        
     }
 }
 
@@ -188,11 +236,14 @@ extension ScannerVC {
         guard error == nil,
               let imageData = photo.fileDataRepresentation(),
               let image = UIImage(data: imageData)
+                
         else {
+        
             print("사진 처리 실패:", error ?? "")
             return
         }
-        viewModel.setImageToServcer(img: image)
+        print("")
+        self.pickedImg = image
     }
     
     private func configurePreviewLayer() {
