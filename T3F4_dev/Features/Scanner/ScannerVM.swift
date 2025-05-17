@@ -12,7 +12,7 @@ class ScannerVM {
     
     //Input
     func setImageToServcer(img: UIImage) {
-        
+        //TODO: API Request
     }
     
     
