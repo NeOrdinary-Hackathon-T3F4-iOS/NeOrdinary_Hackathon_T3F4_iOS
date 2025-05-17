@@ -16,7 +16,7 @@ class MainVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        let homeVC = UIHostingController(rootView: GrowSuccessView())
+        let homeVC = UIHostingController(rootView: HomeView())
         homeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "homeTap"), tag: 0)
 
         let settingsVC = UIHostingController(rootView: ChallengeView())
