@@ -6,6 +6,7 @@
 //
 
 import Combine
+import SwiftUI
 
 class ChallengeVM: ObservableObject {
   
@@ -64,4 +65,3 @@ class ChallengeVM: ObservableObject {
     isChallengeAwardSheetPresented = true
   }
 }
-

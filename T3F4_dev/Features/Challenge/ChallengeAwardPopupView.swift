@@ -20,7 +20,9 @@ struct ChallengeAwardPopupView: View {
         HStack {
           Spacer()
           Button {
-            viewModel.isAwardItemPopupPresented = false
+            withoutAnimation {
+              viewModel.isAwardItemPopupPresented = false
+            }
           } label: {
             Image("x")
           }
@@ -39,7 +41,9 @@ struct ChallengeAwardPopupView: View {
           }
           
           Button {
-            viewModel.useItem()
+            withoutAnimation {
+              viewModel.useItem()
+            }
           } label: {
             Text("바로 사용하기")
               .font(AppFont.body_medium_medium.font)
