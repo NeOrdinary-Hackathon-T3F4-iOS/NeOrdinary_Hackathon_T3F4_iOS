@@ -55,12 +55,19 @@ private extension ChallengeInfoSectionView {
     var body: some View {
       HStack {
         Text(type.title)
+          .font(AppFont.body_medium_medium.font)
+          .foregroundStyle(Color(R.Color.neutral_black.rawValue))
         Spacer()
         HStack(spacing: UI.contentSpacing) {
           Text("1")
+            .font(AppFont.heading_Medium_bold.font)
             .foregroundStyle(Color(R.Color.primary_default.rawValue))
           Text("/")
+            .font(AppFont.body_medium_medium.font)
+            .foregroundStyle(Color(R.Color.neutral_90.rawValue))
           Text("2")
+            .font(AppFont.body_large_bold.font)
+            .foregroundStyle(Color(R.Color.neutral_90.rawValue))
         }
       }
       .padding(UI.contentPadding)
@@ -83,6 +90,7 @@ private extension ChallengeInfoSectionView {
     
     var body: some View {
       Text("오늘도 힘내서 제로 웨이스트 실천해보아요")
+        .font(AppFont.body_small_light.font)
         .foregroundStyle(.black)
         .frame(maxWidth: .infinity)
         .padding(UI.contentPadding)

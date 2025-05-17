@@ -26,6 +26,7 @@ struct ItemSectionView: View {
         VStack {
           item.image
           Text("0") // TODO: - 현재 하드코딩, DB에서 받아오기
+            .font(AppFont.body_medium_medium.font)
             .foregroundStyle(UI.textColor)
         }
       }
