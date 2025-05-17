@@ -12,7 +12,27 @@ enum MissionType {
     case upcycling
     case petLabel
     case multiuse
-    
+    case flogging
+  
+  init(fromTitle title: String) {
+    switch title {
+    case "음식 남기지 않기":
+      self = .cleanPlate
+    case "매일 텀블러 사용":
+      self = .tumbler
+    case "업사이클링 실천":
+      self = .upcycling
+    case "페트병 라벨 제거해서 버리기":
+      self = .petLabel
+    case "다회용기 챙겨서 테이크아웃":
+      self = .multiuse
+    case "플로깅 2회 이상":
+      self = .flogging
+    default:
+      // 기본값 설정 또는 에러 처리
+      self = .cleanPlate
+    }
+  }
 }
 
 extension MissionType {
@@ -66,6 +86,16 @@ extension MissionType {
                     - errors: 판단 실패 시 이유
                     - message: 간단한 한국어 설명  
                     """
+        case .flogging:
+                    """
+                    당신은 사진 한 장으로 ‘플로깅(plogging)’ 활동이 이루어지고 있는지를 판별하는 전문가 AI입니다.  
+                    사진에서 사람이 조깅하면서 쓰레기를 줍는 장면이 명확히 보이면 성공으로 간주합니다.  
+                    업로드된 사진을 보고 다음 키만 JSON으로 응답하세요.  
+                    - success: 플로깅이 명확히 확인되면 true, 아니면 false  
+                    - errors: 판단 실패 또는 불명확한 이유 목록(성공 시 빈 배열)  
+                    - message: 간단한 한국어 설명    
+                    """
+          
         }
     }
 }

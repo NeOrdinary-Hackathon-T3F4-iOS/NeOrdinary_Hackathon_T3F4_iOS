@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChallengeActionInfoView: View {
 
-  var selectedChallenge: ChallengeModel
+  let type: MissionType
   
   // MARK: - View
   

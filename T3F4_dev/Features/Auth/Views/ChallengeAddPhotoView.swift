@@ -10,7 +10,8 @@ import SwiftUI
 struct ChallengeAddPhotoView: View {
   
     @State private var isCameraViewPresented = false
-    
+  let type: MissionType
+  
   // MARK: - View
   
   var body: some View {
@@ -39,7 +40,7 @@ struct ChallengeAddPhotoView: View {
       }
     }
     .fullScreenCover(isPresented: $isCameraViewPresented) {
-        ScannerContainerView(isPresented: $isCameraViewPresented)
+      ScannerContainerView(isPresented: $isCameraViewPresented, type: type)
             .ignoresSafeArea()
     }
   }

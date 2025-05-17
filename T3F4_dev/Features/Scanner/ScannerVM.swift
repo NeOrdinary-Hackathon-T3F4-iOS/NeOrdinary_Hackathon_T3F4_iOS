@@ -13,8 +13,13 @@ protocol ScannerView {
 
 class ScannerVM {
 
-    
+  let type: MissionType
     var view: ScannerView?
+  
+  init(type: MissionType, view: ScannerView? = nil) {
+    self.type = type
+    self.view = view
+  }
     
     func setImageToServcer(img: UIImage, type: MissionType) {
         //TODO: API Request

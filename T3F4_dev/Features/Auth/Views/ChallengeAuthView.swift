@@ -12,6 +12,7 @@ struct ChallengeAuthView: View {
   // MARK: - Properties
   
   private var selectedChallenge: ChallengeModel
+  let type: MissionType
   @Binding private var isPresented: Bool
   
   // MARK: - Initialize
@@ -19,6 +20,7 @@ struct ChallengeAuthView: View {
   init(selectedChallenge: ChallengeModel, isPresented: Binding<Bool>) {
     self.selectedChallenge = selectedChallenge
     self._isPresented = isPresented
+    type = MissionType(fromTitle: selectedChallenge.name)
   }
   
   // MARK: - View
@@ -27,9 +29,9 @@ struct ChallengeAuthView: View {
     NavigationStack {
       ScrollView {
         VStack(spacing: 24) {
-          ChallengeActionInfoView(selectedChallenge: selectedChallenge)
+          ChallengeActionInfoView(type: type)
           VStack(spacing: 16) {
-            ChallengeAddPhotoView()
+            ChallengeAddPhotoView(type: type)
             ChallengeAuthPhotoSection(isAuthCompleted: false)
             ChallengeAuthPhotoSection(isAuthCompleted: true)
           }
