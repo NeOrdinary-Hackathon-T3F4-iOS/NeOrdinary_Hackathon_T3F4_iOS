@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ChallengeActionInfoView: View {
 
+  var selectedChallenge: ChallengeModel
+  
   // MARK: - View
   
   var body: some View {

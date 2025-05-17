@@ -27,7 +27,7 @@ struct ChallengeAuthView: View {
     NavigationStack {
       ScrollView {
         VStack(spacing: 24) {
-          ChallengeActionInfoView()
+          ChallengeActionInfoView(selectedChallenge: selectedChallenge)
           VStack(spacing: 16) {
             ChallengeAddPhotoView()
             ChallengeAuthPhotoSection(isAuthCompleted: false)

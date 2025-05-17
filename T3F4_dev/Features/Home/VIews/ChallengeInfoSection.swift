@@ -53,10 +53,11 @@ struct ChallengeInfoSectionView: View {
               let decoded = try JSONDecoder().decode(MissionDto.self, from: data)
               print("응답 성공:", decoded.result)
               let result = decoded.result
-              let weeklyModels = result.filter { $0.periodType == ChallengeType.weekly.rawValue }
-              let todayModels = result.filter { $0.periodType == ChallengeType.today.rawValue }
-              weeklyModels.forEach { model in
-                self.weeklyModels.append(
+
+              // 주간 도전 과제
+              let weeklyModels = result
+                .filter { $0.periodType == ChallengeType.weekly.rawValue }
+                .map { model in
                   ChallengeModel(
                     id: model.id,
                     name: model.title,
@@ -64,20 +65,22 @@ struct ChallengeInfoSectionView: View {
                     itemType: ItemType(fromAPI: model.reward),
                     challengeType: .weekly
                   )
-                )
-              }
-              
-              todayModels.forEach { model in
-                self.todayModels.append(
+                }
+              self.weeklyModels = weeklyModels
+
+              // 일일 도전 과제
+              let todayModels = result
+                .filter { $0.periodType == ChallengeType.today.rawValue }
+                .map { model in
                   ChallengeModel(
                     id: model.id,
                     name: model.title,
                     status: StatusType(fromAPI: model.status),
                     itemType: ItemType(fromAPI: model.reward),
-                    challengeType: .weekly
+                    challengeType: .today
                   )
-                )
-              }
+                }
+              self.todayModels = todayModels
             } catch {
               print("디코딩 에러:", error)
             }
