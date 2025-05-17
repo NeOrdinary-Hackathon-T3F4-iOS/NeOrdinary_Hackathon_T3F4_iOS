@@ -22,7 +22,7 @@ struct WeeklyChallengeView: View {
                   } label: {
                     ChallengeRow(name: challenge.name, status: challenge.status, itemType: challenge.itemType)
                   }
-                  .buttonStyle(.plain)
+                  .buttonStyle(.borderless)
                 }
             }.padding(.top, 8)
         }.padding(.horizontal).padding(.vertical).background(Color.white).cornerRadius(20)

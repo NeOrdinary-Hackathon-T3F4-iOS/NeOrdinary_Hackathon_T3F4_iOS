@@ -21,7 +21,7 @@ struct TodayChallengeView: View {
                   } label: {
                     ChallengeRow(name: challenge.name, status: challenge.status, itemType: challenge.itemType)
                   }
-                  .buttonStyle(.plain)
+                  .buttonStyle(.borderless)
                 }
             }.padding(.top, 8)
         }
