@@ -38,7 +38,7 @@ struct GrowSuccessView: View {
 }
 
 class GrowSuccessVM: ObservableObject {
-  @Published var growedTime = ""
+  @Published var growedTime = "2025. 05. 17"
   @Published var userName = ""
   @Published var babyName = ""
 }
