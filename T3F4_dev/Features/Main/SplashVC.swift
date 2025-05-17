@@ -7,69 +7,79 @@
 
 
 import Foundation
-import UIKit
+import SwiftUI
 
 
 /**
  스플래시 화면 뷰 컨트롤러
  */
 class SplashVC: UIViewController {
+  
+  private var maxseconds: Int = 2
+  private var timer = Timer()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.view.backgroundColor = .clear
+    self.navigationController?.navigationBar.isHidden = true
+    makelogo()
+    runtimer()
     
-    private var maxseconds: Int = 2
-    private var timer = Timer()
-    private var logo = UIImageView()
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .clear
-        self.navigationController?.navigationBar.isHidden = true
-        makelogo()
-        runtimer()
-        
+  }
+  
+  private func makelogo() {
+    let splashSwiftUIView = SplashView()
+    let hostingVC = UIHostingController(rootView: splashSwiftUIView)
+    
+    addChild(hostingVC)
+    view.addSubview(hostingVC.view)
+    hostingVC.didMove(toParent: self)
+    
+    hostingVC.view.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      hostingVC.view.topAnchor.constraint(equalTo: view.topAnchor),
+      hostingVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      hostingVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      hostingVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+    ])
+    
+  }
+  
+  
+  func runtimer() {
+    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updatetimer), userInfo: nil, repeats: true)
+  }
+  
+  /**
+   타이머 동작 함수
+   */
+  @objc func updatetimer() {
+    maxseconds = maxseconds - 1
+    if maxseconds == 0 {
+      timer.invalidate()
+      navigationController?.viewControllers = [MainVC()]
+      return
+    } else if maxseconds < 0 {
+      timer.invalidate()
+      return
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+  }
+  
+}
 
-   }
-    
-    private func makelogo() {
-        self.view.addSubview(logo)
-        
-        
-        logo.image = UIImage(named: "logo.png")
-        logo.contentMode = .scaleAspectFit
-        
-        
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        //        logo.snp.makeConstraints {
-        //            $0.center.equalToSuperview()
-        //            $0.width.equalTo(266)
-        //            $0.height.equalTo(92)
-        //        }
-        
-        
+struct SplashView: View {
+  var body: some View {
+    VStack(spacing: 10) {
+      Spacer()
+      Image("splashCharacter")
+      Image("splash_logo")
+      Spacer()
     }
-    
-    
-    func runtimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updatetimer), userInfo: nil, repeats: true)
-    }
-    
-    /**
-     타이머 동작 함수
-     */
-    @objc func updatetimer() {
-        maxseconds = maxseconds - 1
-        if maxseconds == 0 {
-            timer.invalidate()
-            navigationController?.viewControllers = [MainVC()]
-            return
-        } else if maxseconds < 0 {
-            timer.invalidate()
-            return
-        }
-        
-    }
-    
+  }
 }
