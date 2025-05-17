@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ScannerContainerView: UIViewControllerRepresentable {
     @Binding var isPresented: Bool
+  let selectedChallenge: ChallengeModel
   let type: MissionType
   
     func makeCoordinator() -> Coordinator {

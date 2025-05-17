@@ -31,7 +31,7 @@ struct ChallengeAuthView: View {
         VStack(spacing: 24) {
           ChallengeActionInfoView(type: type)
           VStack(spacing: 16) {
-            ChallengeAddPhotoView(type: type)
+            ChallengeAddPhotoView(selectedChallenge: selectedChallenge, type: type)
             ChallengeAuthPhotoSection(isAuthCompleted: false)
             ChallengeAuthPhotoSection(isAuthCompleted: true)
           }
