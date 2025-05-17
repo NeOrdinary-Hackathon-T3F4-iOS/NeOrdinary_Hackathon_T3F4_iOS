@@ -27,10 +27,13 @@ struct ChallengeView: View {
         
       }.padding(.horizontal, UI.contentSpacing)
       
-    }.background(Color(R.Color.neutral_20.rawValue)).onAppear {
-      
-    }.onAppear() {
+    }
+    .background(Color(R.Color.neutral_20.rawValue))
+    .onAppear {
       viewModel.onAppear()
+    }
+    .refreshable {
+      viewModel.refresh()
     }
     .fullScreenCover(isPresented: $viewModel.isChallengeAuthSheetPresented) {
       ChallengeAuthView(

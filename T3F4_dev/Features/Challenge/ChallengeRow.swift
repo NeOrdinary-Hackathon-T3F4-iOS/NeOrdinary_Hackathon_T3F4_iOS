@@ -7,10 +7,23 @@
 
 import SwiftUI
 
-enum StatusType {
+enum StatusType: String {
     case complete
-    case nonComplte
+    case nonComplete
     case getAward
+  
+  init(fromAPI value: String) {
+      switch value {
+      case "NOT_STARTED":
+          self = .nonComplete
+      case "COMPLETED":
+          self = .complete
+      case "GET_REWARDS":
+          self = .getAward
+      default:
+          self = .nonComplete
+      }
+  }
 }
 
 extension StatusType {
@@ -18,7 +31,7 @@ extension StatusType {
         switch self {
         case .complete:
             "완료"
-        case .nonComplte:
+        case .nonComplete:
             "미완료"
         case .getAward:
             "보상수령"
@@ -29,7 +42,7 @@ extension StatusType {
         switch self {
         case .complete:
             Color(R.Color.neutral_70.rawValue)
-        case .nonComplte:
+        case .nonComplete:
             Color(R.Color.neutral_20.rawValue)
         case .getAward:
             Color(R.Color.primary_default.rawValue)
@@ -40,7 +53,7 @@ extension StatusType {
         switch self {
         case .complete:
             Color(R.Color.neutral_white.rawValue)
-        case .nonComplte:
+        case .nonComplete:
             Color(R.Color.neutral_90.rawValue)
         case .getAward:
             Color(R.Color.neutral_white.rawValue)
@@ -51,7 +64,7 @@ extension StatusType {
         switch self {
         case .complete:
             Color(R.Color.neutral_90.rawValue)
-        case .nonComplte:
+        case .nonComplete:
             Color(R.Color.neutral_70.rawValue)
         case .getAward:
             Color(R.Color.neutral_90.rawValue)
@@ -62,7 +75,7 @@ extension StatusType {
         switch self {
         case .complete:
             AppFont.body_medium_medium.font
-        case .nonComplte:
+        case .nonComplete:
             AppFont.body_medium_light.font
         case .getAward:
             AppFont.body_medium_medium.font
@@ -73,7 +86,7 @@ extension StatusType {
         switch self {
         case .complete:
             0
-        case .nonComplte:
+        case .nonComplete:
             1
         case .getAward:
             0

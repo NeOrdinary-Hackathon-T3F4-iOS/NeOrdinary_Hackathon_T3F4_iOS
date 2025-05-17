@@ -8,11 +8,26 @@
 import Foundation
 import SwiftUI
 
-enum ItemType: CaseIterable {
+enum ItemType: String, CaseIterable {
   case sun
   case clock
   case fertiliser
   case wateringCan
+  
+  init(fromAPI value: String) {
+    switch value.uppercased() {
+    case "SUN":
+      self = .sun
+    case "POT":
+      self = .wateringCan
+    case "TIME":
+      self = .clock
+    case "FERTILIZER":
+      self = .fertiliser
+    default:
+      self = .sun // or fatalError / throw error, depending on your strategy
+    }
+  }
 }
 
 extension ItemType {
