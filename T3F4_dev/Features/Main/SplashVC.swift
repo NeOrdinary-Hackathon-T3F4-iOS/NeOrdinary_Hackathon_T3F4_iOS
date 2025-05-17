@@ -32,6 +32,21 @@ class SplashVC: UIViewController {
     
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    KeyChainManager.shared.saveDeviceIdentifierToKeychain(UUID().uuidString)
+    let uuid = KeyChainManager.shared.getDeviceIdentifierFromKeychain()
+    print("uuid: ", uuid)
+    if let uuid = uuid {
+      APIManager.shared.performRequest(
+        .members(membersUuids: uuid),
+        completion: { result in
+          print(result)
+        }
+      )
+    }
+  }
+  
   private func makelogo() {
     let splashSwiftUIView = SplashView()
     let hostingVC = UIHostingController(rootView: splashSwiftUIView)

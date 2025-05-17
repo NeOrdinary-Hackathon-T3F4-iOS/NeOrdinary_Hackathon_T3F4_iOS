@@ -7,7 +7,8 @@
 import Alamofire
 import Foundation
 enum Endpoint {
-    case missions(uuid:String)
+    case members(membersUuids: String)
+    case missions(uuid: String)
     case mission(uuid: String, id: String)
     case avatars(memberUuids: String)
 
@@ -16,13 +17,14 @@ enum Endpoint {
     var url: String {
         let base = "http://43.201.72.196:8080/"
         switch self {
+        case .members(let membersUuids):
+          return base + "api/members/\(membersUuids)"
         case .missions:
-            return base + "/api/missions"
+            return base + "api/missions"
         case .mission(let uuid, let id):
-            return base + "/api/missions/\(id)"
+            return base + "api/missions/\(id)"
         case .avatars(let membersUuids):
-            return base + "/api/members/\(membersUuids)"
-       
+            return base + "api/members/\(membersUuids)"
        
         }
     }
@@ -30,7 +32,7 @@ enum Endpoint {
     // 각 케이스별 HTTP 메서드
     var method: HTTPMethod {
         switch self {
-        case .missions, .mission:
+        case .members, .missions, .mission:
             return .post
         case .avatars:
             return .get
@@ -40,12 +42,14 @@ enum Endpoint {
     // 각 케이스별 파라미터
     var parameters: Parameters? {
         switch self {
+        case .members:
+          return nil
         case .missions(let uuid):
-            return ["uuid":uuid]
+            return ["uuid": uuid]
         case .mission(let uuid, let id):
-            return ["uuid":uuid, "id": id]
+            return ["uuid": uuid, "id": id]
         case .avatars(let memberUuids):
-            return ["membersUuid":memberUuids]
+            return ["membersUuid": memberUuids]
         }
     }
     
@@ -58,12 +62,17 @@ class APIManager {
     private let base_url: String = "http://43.201.72.196:8080/"
 
     static let shared = APIManager()
-
+  
+  private init() {}
+  
     func performRequest(
         _ endpoint: Endpoint,
         headers: HTTPHeaders? = nil,
         completion: @escaping (Result<Data, AFError>) -> Void
     ) {
+      print("url: ", endpoint.url)
+      print("method: ", endpoint.method)
+      print("parameters: ", endpoint.parameters)
         AF.request(
             endpoint.url,
             method: endpoint.method,
@@ -76,9 +85,4 @@ class APIManager {
             completion(response.result)
         }
     }
-
-    
- 
-
-    
 }
