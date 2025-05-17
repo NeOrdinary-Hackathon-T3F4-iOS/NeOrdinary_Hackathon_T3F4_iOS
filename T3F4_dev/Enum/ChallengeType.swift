@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum ChallengeType {
-  case today
-  case weekly
+enum ChallengeType: String {
+  case today = "DAILY"
+  case weekly = "WEEKLY"
 }
 
 extension ChallengeType {
