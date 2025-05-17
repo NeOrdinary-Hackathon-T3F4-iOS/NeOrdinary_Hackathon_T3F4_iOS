@@ -26,6 +26,7 @@ struct CharacterSectionView: View {
       Image("character_default")
       Text("새싹이") // TODO: - 현재 하드코딩, DB에서 받아오기
         .foregroundStyle(UI.textColor)
+        .font(AppFont.heading_Medium_bold.font)
     }
     .frame(maxWidth: .infinity)
     .padding(UI.contentPadding)

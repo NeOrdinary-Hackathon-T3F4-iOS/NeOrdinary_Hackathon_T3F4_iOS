@@ -31,12 +31,7 @@ struct HomeView: View {
         CharacterSectionView()
         
         // 챌린지 달성 정보 Section
-        HStack {
-          
-        }
-        .frame(height: 200) //
-        .padding(EdgeInsets(top: 24, leading: 16, bottom: 24, trailing: 16))
-        .background(Color(R.Color.neutral_white.rawValue))
+        ChallengeInfoSectionView()
       }
       .frame(maxWidth: .infinity)
       .padding(.horizontal, 16)
