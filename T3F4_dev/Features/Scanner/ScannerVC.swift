@@ -140,6 +140,7 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
         
         captureBtn.addTarget(self, action: #selector(captureBtnTapped), for: .touchUpInside)
         againCaptureBtn.addTarget(self, action: #selector(againCaptureBtnTapped), for: .touchUpInside)
+        conformBtn.addTarget(self, action: #selector(conformBtnTapped), for: .touchUpInside)
     }
     
     @objc
@@ -150,10 +151,7 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
         previewLayer.connection?.isEnabled = false
         conformBtn.backgroundColor = UIColor(named: R.Color.primary_default.rawValue)
         conformBtn.isEnabled = true
-
         againCaptureBtn.isSelected = true
-        
-        
     }
     
  
@@ -162,7 +160,6 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate {
     @objc
     func conformBtnTapped() {
         print("확인")
-        
     }
     @objc
     func againCaptureBtnTapped() {
