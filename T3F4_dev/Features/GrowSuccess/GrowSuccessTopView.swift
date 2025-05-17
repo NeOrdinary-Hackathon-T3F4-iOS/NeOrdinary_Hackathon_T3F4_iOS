@@ -23,9 +23,9 @@ struct GrowSuccessTopView: View {
             VStack(alignment: .center, spacing: 2) {
                 Spacer().frame(height: 16)
                 
-                Text("(팀명)이 '\(viewModel.babyName)'이름으로 그린피스의").font(AppFont.body_small_light.font)
+                Text("챌싹이 '\(viewModel.babyName)'이름으로 그린피스의").font(AppFont.body_small_light.font)
                 HStack(spacing: 0) {
-                    Text("BreakFreeFromPlastic 캠페인").font(AppFont.body_small_bold.font)
+                    Text("#BreakFreeFromPlastic 캠페인").font(AppFont.body_small_bold.font)
                     Text("에").font(AppFont.body_small_light.font)
                 }
                 

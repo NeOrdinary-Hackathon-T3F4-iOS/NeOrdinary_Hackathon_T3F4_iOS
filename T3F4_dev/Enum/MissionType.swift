@@ -94,7 +94,7 @@ extension MissionType {
     case .tumbler:
       "텀블러 사진 1일 기준 1장 이상"
     case .upcycling:
-      "업사이클링 실천 여부가 명확히 드러나는 사진 1장 이상"
+      "업사이클링 실천 여부가 명확히\n드러나는 사진 1장 이상"
     case .petLabel:
       "라벨 제거한 상태의 페트병 쓰레기 사진 1장 이상"
     case .multiuse:

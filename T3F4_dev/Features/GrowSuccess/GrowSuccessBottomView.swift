@@ -14,7 +14,7 @@ struct GrowSuccessBottomView: View {
     var body: some View {
         VStack(alignment: .center) {
             Spacer().frame(height: 32)
-            Text("\(viewModel.userName)님이 정성으로 키워주신").font(AppFont.body_medium_bold.font)
+            Text("정성으로 키워주신").font(AppFont.body_medium_bold.font)
             Text("새싹이는 샴푸바로 성장했어요!").font(AppFont.body_medium_bold.font)
             
             Spacer().frame(height: 24)
@@ -26,7 +26,7 @@ struct GrowSuccessBottomView: View {
             VStack(alignment: .center, spacing: 2) {
                 Spacer().frame(height: 16)
                 
-                Text("샴푸바 캐릭터를 두개만 더 모으면,").font(AppFont.body_small_bold.font)
+                Text("샴푸바 캐릭터를 2개만 더 모으면,").font(AppFont.body_small_bold.font)
                 Text("톤28의 미니 샴푸바를 받을 수 있어요").font(AppFont.body_small_bold.font)
 
                 Spacer().frame(height: 8)
