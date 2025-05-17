@@ -24,7 +24,7 @@ class ScannerVM {
             let result = try await OpenAIImageEvaluator.shared.evaluateMealImage(image: img, apiKey: apiKey, type: type)
             
             if result.success {
-             
+          
             } else {
                 //error
             }
