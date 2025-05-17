@@ -28,7 +28,11 @@ struct ChallengeAuthView: View {
       ScrollView {
         VStack(spacing: 24) {
           ChallengeActionInfoView()
-          ChallengeAddPhotoView()
+          VStack(spacing: 16) {
+            ChallengeAddPhotoView()
+            ChallengeAuthPhotoSection(isAuthCompleted: false)
+            ChallengeAuthPhotoSection(isAuthCompleted: true)
+          }
           Spacer()
         }
         .padding(.top, 16)
