@@ -21,8 +21,14 @@ struct HomeView: View {
     ScrollView {
       VStack(spacing: UI.contentSpacing) {
         // 프로그래스 바
-        ProgressView()
-          .progressViewStyle(.linear)
+        ProgressBar(
+          value: 0.5,
+          height: 24,
+          foregroundColor: Color(R.Color.primary_default.rawValue),
+          backgroundColor: Color(R.Color.neutral_white.rawValue),
+          radius: 12,
+          shouldAnimate: true
+        )
         
         // 아이템 Section
         ItemSectionView()
