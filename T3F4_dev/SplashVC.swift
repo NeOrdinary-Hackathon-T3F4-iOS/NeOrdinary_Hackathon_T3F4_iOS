@@ -25,6 +25,8 @@ class SplashVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         makelogo()
         runtimer()
+        
+        print(FontManager.shared.medium(ofSize: 12))
     }
     
     override func viewDidAppear(_ animated: Bool) {
