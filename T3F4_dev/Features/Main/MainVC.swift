@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import Alamofire
 import Then
 import SnapKit
@@ -14,8 +15,8 @@ import Kingfisher
 class MainVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let homeVC = UIViewController()
+      
+        let homeVC = UIHostingController(rootView: HomeView())
         homeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "homeTap"), tag: 0)
 
         let settingsVC = UIViewController()
