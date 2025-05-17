@@ -42,6 +42,7 @@ struct ChallengeActionInfoView: View {
             }
           }
         }
+        .frame(maxWidth: .infinity)
         .padding(16)
         .background(Color(R.Color.background_default.rawValue))
         .clipShape(.rect(cornerRadius: 8))

@@ -13,13 +13,14 @@ struct ChallengeAuthPhotoSection: View {
   
   // MARK: - Properties
   
+  let urlString: String
   let isAuthCompleted: Bool
   
   // MARK: - View
   
   var body: some View {
     HStack(spacing: 16) {
-      KFImage(URL(string: "https://picsum.photos/200/300"))// TODO: - 하드코딩
+      KFImage(URL(string: urlString))
         .aspectRatio(contentMode: .fit)
         .frame(width: 56, height: 56)
         .clipShape(.rect(cornerRadius: 8))

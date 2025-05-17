@@ -27,10 +27,12 @@ struct MissionStatResult: Codable {
         case countCurrent = "count_current"
         case content, reward, periodType, images
     }
+  
+  static let empty = MissionStatResult(title: "", countReward: 0, countCurrent: 0, content: "", reward: "", periodType: "", images: [])
 }
 
 // MARK: - Image
-struct MissionStatImage: Codable {
+struct MissionStatImage: Codable, Hashable {
     let imageURL, date: String
 
     enum CodingKeys: String, CodingKey {
