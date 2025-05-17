@@ -82,6 +82,7 @@ class APIManager {
         )
         .validate()
         .responseData { response in
+            
             completion(response.result)
         }
     }

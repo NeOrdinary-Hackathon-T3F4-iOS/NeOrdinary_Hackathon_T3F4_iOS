@@ -1,10 +1,14 @@
 import UIKit
 
-struct ImageEvaluationResult: Decodable {
-    let 남은잔반: Int
-    let 가장가능성높은상태: String
-    let 판단이유: String
+struct gptResult: Decodable {
+    let success: Bool
+    let errors: String?
+    let message: String?
 }
+
+
+
+
 
 class OpenAIImageEvaluator {
     
@@ -18,20 +22,9 @@ class OpenAIImageEvaluator {
     private let endpoint = URL(string: "https://api.openai.com/v1/chat/completions")!
 
 
-    func evaluateMealImage(image: UIImage, apiKey: String) async throws -> ImageEvaluationResult {
+    func evaluateMealImage(image: UIImage, apiKey: String, type: MissionType) async throws -> gptResult {
         let imageBase64 = image.jpegData(compressionQuality: 0.8)!.base64EncodedString()
-        let prompt = """
-        이 이미지를 보고 식사 상태를 판단해주세요.
-        결과는 아래 형식의 JSON으로 주세요:
-        {
-          "남은잔반": 0,
-          
-          "가장가능성높은상태": "식사후",
-          "판단이유": "접시에 음식이 없고, 수저가 정리되어 있습니다."
-        }
-        남은잔반은 percent 값을 써줘
-
-        """
+        let prompt = type.prompt
 
         let message: [[String: Any]] = [
             [
@@ -51,6 +44,7 @@ class OpenAIImageEvaluator {
             "temperature": 0.2
         ]
 
+        print("is In OpenAI? ")
         var request = URLRequest(url: endpoint)
         request.httpMethod = "POST"
         request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
@@ -69,8 +63,8 @@ class OpenAIImageEvaluator {
         guard let jsonData = stripped.data(using: .utf8) else {
             throw NSError(domain: "InvalidData", code: 2)
         }
-
-        return try JSONDecoder().decode(ImageEvaluationResult.self, from: jsonData)
+        print("jsonData:\(jsonData)")
+        return try JSONDecoder().decode(gptResult.self, from: jsonData)
     }
 
     private func stripMarkdownCodeBlock(from text: String) -> String {
