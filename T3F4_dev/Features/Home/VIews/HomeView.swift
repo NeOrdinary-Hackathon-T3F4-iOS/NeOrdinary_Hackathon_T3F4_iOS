@@ -28,12 +28,7 @@ struct HomeView: View {
         ItemSectionView()
         
         // 캐릭터 Section
-        HStack {
-          
-        }
-        .frame(height: 200) //
-        .padding(EdgeInsets(top: 16, leading: 0, bottom: 24, trailing: 0))
-        .background(Color(R.Color.background_subtle.rawValue))
+        CharacterSectionView()
         
         // 챌린지 달성 정보 Section
         HStack {
@@ -46,7 +41,7 @@ struct HomeView: View {
       .frame(maxWidth: .infinity)
       .padding(.horizontal, 16)
     }
-    .background(Color(R.Color.neutral_10.rawValue))
+    .background(Color(R.Color.neutral_20.rawValue))
     .scrollIndicators(.never)
   }
 }
