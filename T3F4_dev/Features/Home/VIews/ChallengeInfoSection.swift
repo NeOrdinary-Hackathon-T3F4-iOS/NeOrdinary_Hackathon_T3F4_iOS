@@ -9,6 +9,11 @@ import SwiftUI
 
 struct ChallengeInfoSectionView: View {
   
+  // MARK: - Properties
+  
+  @State var weeklyModels: [ChallengeModel] = []
+  @State var todayModels: [ChallengeModel] = []
+  
   // MARK: - UI
   
   private enum UI {
@@ -23,14 +28,65 @@ struct ChallengeInfoSectionView: View {
   
   var body: some View {
     VStack(spacing: UI.contentSpacing) {
-      ChallengeInfoView(type: .today)
-      ChallengeInfoView(type: .weekly)
+      ChallengeInfoView(model: $todayModels, type: .today)
+      ChallengeInfoView(model: $weeklyModels, type: .weekly)
       MotivationLabel()
     }
     .frame(maxWidth: .infinity)
     .padding(UI.contentPadding)
     .background(UI.backgroundColor)
     .clipShape(.rect(cornerRadius: UI.contentRadius))
+    .onAppear {
+      fetchChallengeList()
+    }
+  }
+  
+  private func fetchChallengeList() {
+    let uuid = KeyChainManager.shared.getDeviceIdentifierFromKeychain()
+    if let uuid {
+      APIManager.shared.performRequest(
+        .missions(uuid: uuid),
+        completion: { result in
+          switch result {
+          case .success(let data):
+            do {
+              let decoded = try JSONDecoder().decode(MissionDto.self, from: data)
+              print("응답 성공:", decoded.result)
+              let result = decoded.result
+              let weeklyModels = result.filter { $0.periodType == ChallengeType.weekly.rawValue }
+              let todayModels = result.filter { $0.periodType == ChallengeType.today.rawValue }
+              weeklyModels.forEach { model in
+                self.weeklyModels.append(
+                  ChallengeModel(
+                    id: model.id,
+                    name: model.title,
+                    status: StatusType(fromAPI: model.status),
+                    itemType: ItemType(fromAPI: model.reward),
+                    challengeType: .weekly
+                  )
+                )
+              }
+              
+              todayModels.forEach { model in
+                self.todayModels.append(
+                  ChallengeModel(
+                    id: model.id,
+                    name: model.title,
+                    status: StatusType(fromAPI: model.status),
+                    itemType: ItemType(fromAPI: model.reward),
+                    challengeType: .weekly
+                  )
+                )
+              }
+            } catch {
+              print("디코딩 에러:", error)
+            }
+          case .failure(let error):
+            print("요청 에러:", error)
+          }
+        }
+      )
+    }
   }
 }
 
@@ -39,6 +95,7 @@ private extension ChallengeInfoSectionView {
     
     // MARK: - Properties
     
+    @Binding var model: [ChallengeModel]
     let type: ChallengeType
     
     // MARK: - UI
@@ -59,13 +116,13 @@ private extension ChallengeInfoSectionView {
           .foregroundStyle(Color(R.Color.neutral_black.rawValue))
         Spacer()
         HStack(spacing: UI.contentSpacing) {
-          Text("1")
+          Text("\(model.filter({ $0.status != .nonComplete }).count)")
             .font(AppFont.heading_Medium_bold.font)
             .foregroundStyle(Color(R.Color.primary_default.rawValue))
           Text("/")
             .font(AppFont.body_medium_medium.font)
             .foregroundStyle(Color(R.Color.neutral_90.rawValue))
-          Text("2")
+          Text("\(model.count)")
             .font(AppFont.body_large_bold.font)
             .foregroundStyle(Color(R.Color.neutral_90.rawValue))
         }
