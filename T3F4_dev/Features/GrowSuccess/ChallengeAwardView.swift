@@ -11,6 +11,7 @@ struct ChallengeAwardView: View {
   
   // MARK: - Properties
   
+  @State private var isAnimationViewPresented = true
   private var selectedChallenge: ChallengeModel
   @Binding private var isPresented: Bool
   
@@ -23,8 +24,18 @@ struct ChallengeAwardView: View {
   
   // MARK: - View
   
-
   var body: some View {
-    GrowSuccessView()
+    if isAnimationViewPresented {
+      GrowAnimationView()
+        .onAppear {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            withoutAnimation {
+              isAnimationViewPresented = false
+            }
+          }
+        }
+    } else {
+      GrowSuccessView()
+    }
   }
 }
