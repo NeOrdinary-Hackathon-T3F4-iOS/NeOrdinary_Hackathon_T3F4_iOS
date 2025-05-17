@@ -16,10 +16,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
+        window?.overrideUserInterfaceStyle = .light
+
         let nav = UINavigationController()
         nav.viewControllers = [SplashVC()]
         window?.rootViewController = nav
-        
         window?.makeKeyAndVisible()
         guard let _ = (scene as? UIWindowScene) else { return }
     }
