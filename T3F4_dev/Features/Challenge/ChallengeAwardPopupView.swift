@@ -31,11 +31,11 @@ struct ChallengeAwardPopupView: View {
         
         VStack(spacing: 24) {
           VStack(spacing: 12) {
-            Image("item_fertiliser")
+            viewModel.selectedChallenge.itemType.image
               .resizable()
               .frame(width: 140, height: 140)
             
-            Text("[ \("비료") ]를 획득하였습니다!")
+            Text("[ \(viewModel.selectedChallenge.itemType.title) ]를 획득하였습니다!")
               .font(AppFont.body_medium_medium.font)
               .foregroundStyle(Color(R.Color.text_default.rawValue))
           }

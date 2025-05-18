@@ -43,6 +43,19 @@ extension ItemType {
       Image("item_wateringCan")
     }
   }
+  
+  var title: String {
+    switch self {
+    case .sun:
+      "태양"
+    case .wateringCan:
+      "물통"
+    case .fertiliser:
+      "비료"
+    case .clock:
+      "시계"
+    }
+  }
 
   var serverValue: String {
     switch self {
