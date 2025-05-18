@@ -24,7 +24,7 @@ class OpenAIImageEvaluator {
 
     func evaluateMealImage(image: UIImage, apiKey: String, type: MissionType) async throws -> gptResult {
         let imageBase64 = image.jpegData(compressionQuality: 0.8)!.base64EncodedString()
-        let prompt = type.prompt
+        let prompt = type.prompt + "너 생각에 40퍼정도 이상이면 성공이라고 해줘"
 
         let message: [[String: Any]] = [
             [

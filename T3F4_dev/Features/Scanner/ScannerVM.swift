@@ -28,7 +28,7 @@ class ScannerVM {
     func setImageToServcer(img: UIImage, type: MissionType) {
         //TODO: API Request
         let apiKey = ""
-//        
+//
         let memberUuid = KeyChainManager.shared.getDeviceIdentifierFromKeychain()!
         let url = "http://43.201.72.196:8080/api/missions/\(selectedChallenge.id)/progress/\(memberUuid)"
         

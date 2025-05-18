@@ -16,7 +16,6 @@ struct HomeView: View {
   }
   
   // MARK: - View
-  
   var body: some View {
     VStack(spacing: 32) {
       VStack {

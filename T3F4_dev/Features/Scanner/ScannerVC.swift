@@ -85,9 +85,11 @@ class ScannerVC: UIViewController, AVCapturePhotoCaptureDelegate, ScannerView {
                 title: "확인",
                 style: .cancel,
                 handler: { _ in
-                    self.captureSession.startRunning()
-
-
+                    DispatchQueue.global().async {
+                        
+                        self.captureSession.startRunning()
+                        
+                    }
                 }
             )
             
